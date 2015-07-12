@@ -37,6 +37,9 @@ public class Frame extends JFrame {
         JTable tableau = new JTable(datas, titles);
 
         tableau.setDragEnabled(false);
+        tableau.setColumnSelectionAllowed(false);
+        tableau.setSize(1000, 900);
+        tableau.setAutoResizeMode(1);
 
         if(!firstStart)
             getContentPane().removeAll();
