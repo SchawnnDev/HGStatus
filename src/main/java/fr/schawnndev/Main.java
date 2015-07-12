@@ -40,8 +40,6 @@ public class Main {
             servers.add(server);
         }
 
-        servers.add(new Server(10, "mc.uhcgames.com"));
-
         frame = new Frame();
         frame.setVisible(true);
 
