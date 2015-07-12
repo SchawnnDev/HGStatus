@@ -33,21 +33,39 @@ public class ServerInfo {
     }
 
     public ServerStatus getServerStatus(){
-        ServerStatus serverStatus = ServerStatus.RESTARTING;
 
+        if(motd.contains("Hunger Games en cours") || motd.contains("§7Hunger Games en cours"))
+            return ServerStatus.GAME;
+        else if(motd.contains("Génération en cours") || motd.equals("§7Génération en cours"))
+            return ServerStatus.GENERATING;
+        else if(motd.contains("Hunger Games debute") || motd.equals("§2Hunger Games debute"))
+            return ServerStatus.LOBBY;
+        else
+            return ServerStatus.RESTARTING;
+
+    }
+
+    public int getData(){
+        ServerStatus serverStatus = getServerStatus();
         final String _motd = motd;
 
-        if(_motd.contains("Hunger Games en cours") || _motd.contains("§7Hunger Games en cours"))
-            return ServerStatus.GAME;
+        if(serverStatus == ServerStatus.GENERATING) {
+            String motd = _motd.replaceAll("Génération", "").replaceAll("en", "").replaceAll("cours", "").replace('(', ' ').replace(')', ' ').replaceAll("%", "").replaceAll(" ", "");
 
-        else if(_motd.contains("Génération en cours") || _motd.equals("§7Génération en cours"))
-            return ServerStatus.GENERATING;
+            try {
+                return Integer.parseInt(motd);
+            } catch (NumberFormatException e){
+                e.printStackTrace();
+                return 0;
+            }
 
-        else if(_motd.contains("Génération en cours") || _motd.equals("§7Génération en cours"))
-            return ServerStatus.GENERATING;
 
 
+        } else if (serverStatus == ServerStatus.LOBBY) {
 
-        return serverStatus;
+        }
+
+        return 0;
     }
+
 }
