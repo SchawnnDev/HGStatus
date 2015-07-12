@@ -23,9 +23,9 @@ public class Server {
     @Getter
     private String ip;
 
-    public Server(String ip){
+    public Server(int id, String ip){
+        this.id = id;
         this.ip = ip;
-        id = Integer.parseInt(ip.split(".")[0]);
     }
 
 }

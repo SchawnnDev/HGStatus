@@ -21,6 +21,6 @@ public enum ServerStatus {
 
     GAME,
 
-    RESTARTING;
+    RESTARTING
 
 }

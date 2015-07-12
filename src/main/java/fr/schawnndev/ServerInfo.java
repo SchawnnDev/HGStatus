@@ -45,12 +45,16 @@ public class ServerInfo {
 
     }
 
+    public int getAvaiableSlots(){
+        return maxPlayers - playersCount;
+    }
+
     public int getData(){
         ServerStatus serverStatus = getServerStatus();
         final String _motd = motd;
 
         if(serverStatus == ServerStatus.GENERATING) {
-            String motd = _motd.replaceAll("Génération", "").replaceAll("en", "").replaceAll("cours", "").replace('(', ' ').replace(')', ' ').replaceAll("%", "").replaceAll(" ", "");
+            String motd = _motd.replaceAll("Génération", "").replaceAll("§7", "").replaceAll("en", "").replaceAll("cours", "").replace('(', ' ').replace(')', ' ').replaceAll("%", "").replaceAll(" ", "");
 
             try {
                 return Integer.parseInt(motd);
@@ -59,9 +63,15 @@ public class ServerInfo {
                 return 0;
             }
 
-
-
         } else if (serverStatus == ServerStatus.LOBBY) {
+            String motd = _motd.replaceAll("Hunger", "").replaceAll("Games", "").replaceAll("debute", "").replaceAll("dans", "").replaceAll("seconde", "").replaceAll("debute", "secondes").replaceAll("minutes", "").replaceAll("minute", "").replaceAll(" ", "");
+
+            try {
+                return Integer.parseInt(motd);
+            } catch (NumberFormatException e){
+                e.printStackTrace();
+                return 0;
+            }
 
         }
 

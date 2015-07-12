@@ -19,6 +19,7 @@ import java.awt.*;
 public class Frame extends JFrame {
 
     private final String[] titles = {"Serveur", "Ip", "Type", "Statut", "Places"};
+    private boolean firstStart = true;
 
     public Frame(){
         init();
@@ -26,7 +27,7 @@ public class Frame extends JFrame {
 
     private void init(){
         setTitle("HGStatus by SchawnnDev");
-        setSize(400, 300);
+        setSize(500, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -35,8 +36,14 @@ public class Frame extends JFrame {
 
         JTable tableau = new JTable(datas, titles);
 
+        if(!firstStart)
+            getContentPane().removeAll();
+        else
+            firstStart = false;
+
         getContentPane().add(tableau.getTableHeader(), BorderLayout.NORTH);
         getContentPane().add(tableau, BorderLayout.CENTER);
+
 
         pack();
     }
