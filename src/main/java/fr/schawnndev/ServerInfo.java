@@ -14,6 +14,7 @@
 package fr.schawnndev;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class ServerInfo {
 
@@ -26,13 +27,20 @@ public class ServerInfo {
     @Getter
     private int maxPlayers;
 
+    @Getter @Setter
+    private boolean offline;
+
     public ServerInfo(String motd, int playersCount, int maxPlayers){
         this.motd = motd;
         this.playersCount = playersCount;
         this.maxPlayers = maxPlayers;
+        setOffline(false);
     }
 
     public ServerStatus getServerStatus(){
+
+        if(isOffline())
+            return ServerStatus.RESTARTING;
 
         if(motd.contains("Hunger Games en cours") || motd.contains("§7Hunger Games en cours"))
             return ServerStatus.GAME;

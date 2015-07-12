@@ -28,7 +28,7 @@ public class Updater extends Thread {
 
                     ServerInfo serverInfo = Main.getServerInfo(server);
                     ServerStatus serverStatus = serverInfo.getServerStatus();
-                    String type = server.getId() == 8 ? "Soupe" : server.getId() == 2 ? "Mort Subite" : "Normal";
+                    String type = server.getId() == 8 ? "Soupe" : server.getId() == 2 ? "Mort Subite" : server.getId() == 1 ? "Event Team" : "Normal";
                     String statut = serverStatus == ServerStatus.LOBBY ? ("Commence dans " + serverInfo.getData() + " seconde" + (serverInfo.getData() > 1 ? "s" : "")) : serverStatus == ServerStatus.GAME ? "En jeu" : serverStatus == ServerStatus.RESTARTING ? "Redémarrage" : "Génération " + serverInfo.getData() + "%";
 
                     datas[s][0] = "HG " + server.getId();
@@ -38,7 +38,6 @@ public class Updater extends Thread {
                     datas[s][4] = serverInfo.getAvaiableSlots();
 
                     s++;
-
                 }
 
                     Main.getFrame().updateTableau(datas);

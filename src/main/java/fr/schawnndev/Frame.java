@@ -27,7 +27,7 @@ public class Frame extends JFrame {
 
     private void init(){
         setTitle("HGStatus by SchawnnDev");
-        setSize(500, 400);
+        setSize(1000, 900);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -35,6 +35,8 @@ public class Frame extends JFrame {
     public void updateTableau(Object[][] datas){
 
         JTable tableau = new JTable(datas, titles);
+
+        tableau.setDragEnabled(false);
 
         if(!firstStart)
             getContentPane().removeAll();

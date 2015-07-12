@@ -40,11 +40,16 @@ public class Main {
             servers.add(server);
         }
 
+        servers.add(new Server(10, "mc.uhcgames.com"));
+
         frame = new Frame();
         frame.setVisible(true);
 
         updater = new Updater();
         updater.start();
+
+
+
     }
 
     /**
@@ -61,7 +66,23 @@ public class Main {
 
         try {
 
-            Socket sock = new Socket(server.getIp(), 25565);
+            Socket sock = null;
+
+            try {
+                sock = new Socket(server.getIp(), 25565);
+            } catch (Exception e) {
+                ServerInfo serverInfo = new ServerInfo("Eteind", 0, 0);
+                serverInfo.setOffline(true);
+                return serverInfo;
+            }
+
+            if(sock == null){
+
+                ServerInfo serverInfo = new ServerInfo("Eteind", 0, 0);
+                serverInfo.setOffline(true);
+                return serverInfo;
+
+            }
 
             DataOutputStream out = new DataOutputStream(sock.getOutputStream());
             DataInputStream in = new DataInputStream(sock.getInputStream());
@@ -76,6 +97,8 @@ public class Main {
                 }
             }
 
+            System.out.println(str);
+
             data = str.toString().split("§");
             motd = data[0];
             playersCount = Integer.parseInt(data[1]);
@@ -84,6 +107,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         return new ServerInfo(motd, playersCount, maxPlayers);
     }
