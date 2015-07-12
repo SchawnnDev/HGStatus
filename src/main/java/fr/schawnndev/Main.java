@@ -13,7 +13,27 @@
 
 package fr.schawnndev;
 
-import java.applet.Applet;
+import lombok.Getter;
 
-public class Main extends Applet {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+
+    @Getter
+    private static List<Server> servers = new ArrayList<>();
+
+    public static void main(String[] args){
+
+        for(int s = 1; s <= 8; s++){
+            Server server = new Server(s + ".hungergames-mc.fr");
+            servers.add(server);
+        }
+
+        Frame frame = new Frame();
+        frame.setVisible(true);
+    }
+
+    public static 
+
 }
