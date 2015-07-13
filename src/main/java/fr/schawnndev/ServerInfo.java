@@ -42,11 +42,11 @@ public class ServerInfo {
         if(isOffline())
             return ServerStatus.RESTARTING;
 
-        if(motd.contains("Hunger Games en cours") || motd.contains("§7Hunger Games en cours"))
+        if(motd.contains("Hunger Games en cours") || motd.contains("Ã©7Hunger Games en cours"))
             return ServerStatus.GAME;
-        else if(motd.contains("Génération en cours") || motd.equals("§7Génération en cours"))
+        else if(motd.contains("GÃ©nÃ©ration en cours") || motd.equals("Ã©7GÃ©nÃ©ration en cours"))
             return ServerStatus.GENERATING;
-        else if(motd.contains("Hunger Games debute") || motd.equals("§2Hunger Games debute"))
+        else if(motd.contains("Hunger Games debute") || motd.equals("Ã©2Hunger Games debute"))
             return ServerStatus.LOBBY;
         else
             return ServerStatus.RESTARTING;
@@ -62,7 +62,7 @@ public class ServerInfo {
         final String _motd = motd;
 
         if(serverStatus == ServerStatus.GENERATING) {
-            String motd = _motd.replaceAll("Génération", "").replaceAll("§7", "").replaceAll("en", "").replaceAll("cours", "").replace('(', ' ').replace(')', ' ').replaceAll("%", "").replaceAll(" ", "");
+            String motd = _motd.replaceAll("GÃ©nÃ©ration", "").replaceAll("Ã©7", "").replaceAll("en", "").replaceAll("cours", "").replace('(', ' ').replace(')', ' ').replaceAll("%", "").replaceAll(" ", "");
 
             try {
                 return Integer.parseInt(motd);

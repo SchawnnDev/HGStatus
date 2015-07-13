@@ -14,6 +14,7 @@
 package fr.schawnndev;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class Frame extends JFrame {
@@ -39,7 +40,11 @@ public class Frame extends JFrame {
         tableau.setDragEnabled(false);
         tableau.setColumnSelectionAllowed(false);
         tableau.setSize(1000, 900);
-        tableau.setAutoResizeMode(1);
+        tableau.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tableau.setRowHeight(tableau.getRowHeight() + 10);
+
+        for (int i = 0; i < tableau.getColumnCount(); i++)
+            tableau.getColumnModel().getColumn(i).setPreferredWidth(150);
 
         if(!firstStart)
             getContentPane().removeAll();

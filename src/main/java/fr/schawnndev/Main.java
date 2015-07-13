@@ -46,8 +46,6 @@ public class Main {
         updater = new Updater();
         updater.start();
 
-
-
     }
 
     /**
@@ -89,7 +87,7 @@ public class Main {
 
             System.out.println(str);
 
-            data = str.toString().split("ง");
+            data = str.toString().split("ยง");
             motd = data[0];
             playersCount = Integer.parseInt(data[1]);
             maxPlayers = Integer.parseInt(data[2]);
@@ -97,7 +95,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         return new ServerInfo(motd, playersCount, maxPlayers);
     }
