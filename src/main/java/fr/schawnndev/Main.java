@@ -74,14 +74,6 @@ public class Main {
                 return serverInfo;
             }
 
-            if(sock == null){
-
-                ServerInfo serverInfo = new ServerInfo("Eteind", 0, 0);
-                serverInfo.setOffline(true);
-                return serverInfo;
-
-            }
-
             DataOutputStream out = new DataOutputStream(sock.getOutputStream());
             DataInputStream in = new DataInputStream(sock.getInputStream());
 
@@ -97,7 +89,7 @@ public class Main {
 
             System.out.println(str);
 
-            data = str.toString().split("ยง");
+            data = str.toString().split("ง");
             motd = data[0];
             playersCount = Integer.parseInt(data[1]);
             maxPlayers = Integer.parseInt(data[2]);
