@@ -15,10 +15,6 @@ package fr.schawnndev;
 
 import lombok.Getter;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,55 +44,10 @@ public class Main {
 
     }
 
-    /**
-     *
-     *  Code from https://bukkit.org/threads/get-player-count-and-motd-of-another-server.123219/
-     *
-     */
 
     public static ServerInfo getServerInfo(Server server){
-        String[] data = null;
-        String motd = null;
-        int playersCount = 0;
-        int maxPlayers = 0;
-
-        try {
-
-            Socket sock = null;
-
-            try {
-                sock = new Socket(server.getIp(), 25565);
-            } catch (Exception e) {
-                ServerInfo serverInfo = new ServerInfo("Eteind", 0, 0);
-                serverInfo.setOffline(true);
-                return serverInfo;
-            }
-
-            DataOutputStream out = new DataOutputStream(sock.getOutputStream());
-            DataInputStream in = new DataInputStream(sock.getInputStream());
-
-            out.write(0xFE);
-
-            int b;
-            StringBuffer str = new StringBuffer();
-            while ((b = in.read()) != -1) {
-                if (b != 0 && b > 16 && b != 255 && b != 23 && b != 24) {
-                    str.append((char) b);
-                }
-            }
-
-            System.out.println(str);
-
-            data = str.toString().split("§");
-            motd = data[0];
-            playersCount = Integer.parseInt(data[1]);
-            maxPlayers = Integer.parseInt(data[2]);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return new ServerInfo(motd, playersCount, maxPlayers);
+        ServerStatus serverStatus = new ServerStatus(server.getIp());
+        return new ServerInfo((String) serverStatus.getServerStatus(StatusType.MOTD), (Long) serverStatus.getServerStatus(StatusType.PLAYERS), (Long) serverStatus.getServerStatus(StatusType.MAX_PLAYERS));
     }
 
 }

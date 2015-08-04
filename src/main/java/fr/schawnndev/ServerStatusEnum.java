@@ -2,7 +2,7 @@
  * ******************************************************
  *  * Copyright (C) 2015 SchawnnDev <contact@schawnndev.fr>
  *  *
- *  * This file (fr.schawnndev.ServerStatus) is part of HGStatus.
+ *  * This file (fr.schawnndev.ServerStatusEnum) is part of HGStatus.
  *  *
  *  * Created by SchawnnDev on 12/07/15 12:40.
  *  *

@@ -27,9 +27,9 @@ public class Updater extends Thread {
                 for(Server server : Main.getServers()){
 
                     ServerInfo serverInfo = Main.getServerInfo(server);
-                    ServerStatus serverStatus = serverInfo.getServerStatus();
+                    ServerStatusEnum serverStatusEnum = serverInfo.getServerStatus();
                     String type = server.getId() == 8 ? "Soupe" : server.getId() == 2 ? "Mort Subite" : server.getId() == 1 ? "Event Team" : "Normal";
-                    String statut = serverStatus == ServerStatus.LOBBY ? ("Commence dans " + serverInfo.getData() + " seconde" + (serverInfo.getData() > 1 ? "s" : "")) : serverStatus == ServerStatus.GAME ? "En jeu" : serverStatus == ServerStatus.RESTARTING ? "Redémarrage" : "Génération " + serverInfo.getData() + "%";
+                    String statut = serverStatusEnum == ServerStatusEnum.LOBBY ? ("Commence dans " + serverInfo.getData() + " seconde" + (serverInfo.getData() > 1 ? "s" : "")) : serverStatusEnum == ServerStatusEnum.GAME ? "En jeu" : serverStatusEnum == ServerStatusEnum.RESTARTING ? "Redémarrage" : "Génération " + serverInfo.getData() + "%";
 
                     datas[s][0] = "HG " + server.getId();
                     datas[s][1] = server.getIp();

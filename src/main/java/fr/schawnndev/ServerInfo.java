@@ -22,46 +22,46 @@ public class ServerInfo {
     private String motd;
 
     @Getter
-    private int playersCount;
+    private long playersCount;
 
     @Getter
-    private int maxPlayers;
+    private long maxPlayers;
 
     @Getter @Setter
     private boolean offline;
 
-    public ServerInfo(String motd, int playersCount, int maxPlayers){
+    public ServerInfo(String motd, long playersCount, long maxPlayers){
         this.motd = motd;
         this.playersCount = playersCount;
         this.maxPlayers = maxPlayers;
         setOffline(false);
     }
 
-    public ServerStatus getServerStatus(){
+    public ServerStatusEnum getServerStatus(){
 
         if(isOffline())
-            return ServerStatus.RESTARTING;
+            return ServerStatusEnum.RESTARTING;
 
         if(motd.contains("Hunger Games en cours") || motd.contains("§7Hunger Games en cours"))
-            return ServerStatus.GAME;
+            return ServerStatusEnum.GAME;
         else if(motd.contains("Génération en cours") || motd.equals("§7Génération en cours"))
-            return ServerStatus.GENERATING;
+            return ServerStatusEnum.GENERATING;
         else if(motd.contains("Hunger Games debute") || motd.equals("§2Hunger Games debute"))
-            return ServerStatus.LOBBY;
+            return ServerStatusEnum.LOBBY;
         else
-            return ServerStatus.RESTARTING;
+            return ServerStatusEnum.RESTARTING;
 
     }
 
-    public int getAvaiableSlots(){
+    public long getAvaiableSlots(){
         return maxPlayers - playersCount;
     }
 
     public int getData(){
-        ServerStatus serverStatus = getServerStatus();
+        ServerStatusEnum serverStatusEnum = getServerStatus();
         final String _motd = motd;
 
-        if(serverStatus == ServerStatus.GENERATING) {
+        if(serverStatusEnum == ServerStatusEnum.GENERATING) {
             String motd = _motd.replaceAll("Génération", "").replaceAll("§7", "").replaceAll("en", "").replaceAll("cours", "").replace('(', ' ').replace(')', ' ').replaceAll("%", "").replaceAll(" ", "");
 
             try {
@@ -71,7 +71,7 @@ public class ServerInfo {
                 return 0;
             }
 
-        } else if (serverStatus == ServerStatus.LOBBY) {
+        } else if (serverStatusEnum == ServerStatusEnum.LOBBY) {
             String motd = _motd.replaceAll("Hunger", "").replaceAll("Games", "").replaceAll("debute", "").replaceAll("dans", "").replaceAll("seconde", "").replaceAll("debute", "secondes").replaceAll("minutes", "").replaceAll("minute", "").replaceAll(" ", "");
 
             try {
