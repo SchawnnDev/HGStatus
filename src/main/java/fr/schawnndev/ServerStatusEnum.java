@@ -13,7 +13,7 @@
 
 package fr.schawnndev;
 
-public enum ServerStatus {
+public enum ServerStatusEnum {
 
     GENERATING,
 
